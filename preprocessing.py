@@ -19,3 +19,4 @@ def lbl_norm(data):  # Layer by layer normalization 逐层归一化
 
 
 print(lbl_norm(data))
+'''逐层归一化目前成功'''
