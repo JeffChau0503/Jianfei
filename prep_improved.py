@@ -11,6 +11,14 @@ import os
 import matplotlib.pyplot as plt
 import scipy.signal as spy
 
+
+#  基于移动平均框(通过卷积)平滑曲线 该函数用于生成波形图
+def smooth(y, box_pts):
+    box = np.ones(box_pts)/box_pts
+    yhat = np.convolve(y, box, mode='same')
+    return yhat
+
+
 data_path = 'E:/Datafile/0716data/pyrite0717.txt'  # --------------------------------------------------更改1 文件读取路径
 # data为二维数组. 代码含义:把这些数据读取出来,存为numpy数组.该方法只适用于txt文件中是纯数字(float,int)
 data = np.loadtxt(data_path)
@@ -50,9 +58,9 @@ for i in range(m):
 # 波形图
 for i in range(m):
     x = np.linspace(369.14, 1108.84, num=1082)  # ----------------------------------------------------检查txt是否需要更改
-    y = data[i, :] * 10
+    y = data[i, :] * 100
     yhat = spy.savgol_filter(y, 21, 7, mode='wrap')  # Savitzky-Golay filter
-    plt.plot(x, yhat, 'k', lw=0.5)
+    plt.plot(x, smooth(y, 37), 'k', lw=0.5)
     plt.xticks([])  # 删掉刻度信息
     plt.yticks([])
     plt.axis('off')  # 删掉坐标轴
