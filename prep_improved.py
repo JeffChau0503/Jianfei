@@ -52,19 +52,20 @@ for i in range(m):
     mnist数据集图片命名规则：0_00001.jpg：0表示对应图片的内容，即标签；
     00001表示标签为0的图片中第1张图片，00002为第2张图片，以此类推........
     '''
-    save_path = os.path.join(type_dir1, "0_" + str(i).zfill(5) + '.jpg')  # -----------------------更改4 更改类即"0_"数字
+    save_path = os.path.join(type_dir1, "0_" + str(i) + '.png')  # -----------------------更改4 更改类即"0_"数字
     scipy.misc.imsave(save_path, matrix)
+
+print("Grayscale End\n")
 
 # 波形图
 for i in range(m):
     x = np.linspace(369.14, 1108.84, num=1082)  # ----------------------------------------------------检查txt是否需要更改
     y = data[i, :] * 100
-    yhat = spy.savgol_filter(y, 21, 7, mode='wrap')  # Savitzky-Golay filter
     plt.plot(x, smooth(y, 37), 'k', lw=0.5)
     plt.xticks([])  # 删掉刻度信息
     plt.yticks([])
     plt.axis('off')  # 删掉坐标轴
-    plt.savefig(type_dir2 + "0_" + str(i).zfill(5) + '.jpg')  # -----------------------------------更改5 更改类即"0_"数字
+    plt.savefig(type_dir2 + "0_" + str(i) + '.png')  # -----------------------------------更改5 更改类即"0_"数字
     plt.clf()
 
-print("End\n")
+print("Waveform End\n")
